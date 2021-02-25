@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AD4M</title>
+<style id="applicationStylesheet" type="text/css">
+    @font-face {
+        font-family: 'Orbitron';
+        src: url('fonts/Orbitron/Orbitron-VariableFont_wght.ttf'); /* IE9 Compat Modes */
+    }
+
+    @font-face {
+        font-family: 'VT323';
+        src: url('fonts/VT323/VT323-Regular.ttf'); /* IE9 Compat Modes */
+    }
+    
+
+    VT323-Regular
+
+    html,body { 
+        height: 100%; 
+        margin: 0px; 
+        padding: 0px; 
+        font-family: 'Orbitron';
+    }
+
+    #background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: black;
+    }
+
+    #grid-backdrop {
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        width: 100%;
+        background-image: url('grid-landscape-purple.jpg');
+        background-size: cover;
+    }
+
+    #scroll-container {
+        position: absolute;
+        height: 80%;
+        padding: 50px;
+        color: white;
+        overflow: scroll;
+        
+        scroll-behavior: auto;
+    }
+
+    #heading {
+        text-align: center;
+        padding: 50px;
+    }
+
+    #title {
+        position: relative;
+        width: 600px;
+        height: 300px;
+        margin: auto;
+    }
+
+    #title-text {
+        padding-top: 110px;
+        font-size: 48px;
+    }
+
+    .cta-button {
+        border-radius: 5px;
+        background-color: #38a8efff;
+        cursor: pointer;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .cta-button:visited {
+        color: white;
+        
+    }
+
+    #logo {
+        float: left;
+        width: 300px;
+    }
+
+    #sub-title {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        font-size: 30px;
+        line-height: 60px;
+    }
+
+    .card {
+        border: white 1px solid;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 100px;
+        background-color:rgba(1, 1, 1, 0.5);
+        font-family: 'VT323';
+        font-size: 25px;
+    }
+
+    .card-image {
+        width: 150px;
+        float: left;
+        margin-right: 30px;
+        
+    }
+
+    .card-title {
+        font-size: 30px;
+        display: block;
+        font-family: 'Orbitron';
+    }
+
+    .emphasis {
+        color: #d38ef5ff;
+    }
+
+    .emph2 {
+        color: #38a8efff;
+    }
+
+    .filler {
+        font-size: 50px;
+        margin: 90px 80px;
+        line-height: 85px;
+        font-family: 'VT323';
+    }
+
+    .suggests {
+        font-size: 50px;
+        margin: 90px 80px;
+        line-height: 85px;
+        font-family: 'VT323';
+    }
+
+
+    .clearfix::before,
+    .clearfix::after {
+        content: " ";
+        display: table;
+    } 
+
+    .clearfix::after {
+        clear: both;
+    }
+
+    .clearfix {
+        *zoom: 1; /* Für den IE6 und IE7 */
+    }
+
+    .center {
+        text-align: center;
+    }
+
+</style>
+</head>
+<body>
+    <div id="background">
+        <div id="grid-backdrop">
+        </div>
+    </div>
+    
+
+    <div id="scroll-container">
+        <div id="heading">
+            <div id="title">
+                <img id="logo" src="Logo.png">
+                <h1 id="title-text">AD4M</h1>
+                <a href="https://github.com/perspect3vism/perspect3ve/blob/master/src/ad4m/README.md" class="cta-button">Documentation</a>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div id="sub-title">
+                <div><span class="emphasis">A</span>gent-Centric <span class="emphasis">D</span>istributed <span class="emphasis">A</span>pplication <span class="emphasis">M</span>eta-ontology</div>
+                <div>Spanning Layer for App Logic</div>
+                <div><span class="emph2">Interoperability</span> for all p2p and centralized apps</div>
+            </div>        
+
+            <img src="down-arrow.png">
+        </div>
+
+        
+        
+        <div class="filler">
+            AD4M is a set of minimal assumptions to make all apps interoperate.
+        </div>
+
+        <div class="filler">
+            It is consolidating the quintessence of agent-centric software
+            architecture and as such is basically an architecture pattern.
+        </div>
+
+        <div class="filler">
+            It suggests 3 basic ontological entities:
+        </div>
+
+        
+        <div class="card">
+            <img class="card-image" src="agent.png">
+            <span class="card-title">Agents</span>
+            …represent humans with their devices, which is what the internet actually is. Technically represented as 
+            <span class="emph2">Decentralized Identifier - DID</span>.
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="card">
+            <img class="card-image" src="language.png">
+            <span class="card-title">Languages</span>
+            …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <language>://<language specific expression address>. That URL and the Expression itself is the only objective part in AD4M.
+            <div class="clearfix"></div>    
+        </div>
+
+        <div class="card">
+            <img class="card-image" src="perspective.png">
+            <span class="card-title">Perspectives</span>
+            …belong to a specific agent. They represent context and association between expressions. They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links because all three items are just URLs pointing to expressions. <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span> There is no such thing as a Perspective that does not belong to an agent. It is like the canvas on which an agent perceives and onto which they create anything. To the next layer above (either the very general UI built in Perspectivism - or any other special purpose UI), they are like a database scope.
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="center">
+            <a href="https://github.com/perspect3vism/perspect3ve/blob/master/src/ad4m/README.md" class="cta-button">Find out more on GitHub...</a>
+        </div>
+        
+    </div>
+</body>
+</html>
