@@ -15,9 +15,6 @@
         font-family: 'VT323';
         src: url('fonts/VT323/VT323-Regular.ttf'); /* IE9 Compat Modes */
     }
-    
-
-    VT323-Regular
 
     html,body { 
         height: 100%; 
@@ -80,9 +77,13 @@
         text-decoration: none;
     }
 
-    .cta-button:visited {
+    a {
+        color: #38a8efff;
+        text-decoration: none;
+    }
+
+    a:visited {
         color: white;
-        
     }
 
     #logo {
@@ -161,6 +162,10 @@
         text-align: center;
     }
 
+    .code {
+        background-color: gray;
+    }
+
 </style>
 </head>
 <body>
@@ -216,14 +221,20 @@
         <div class="card">
             <img class="card-image" src="language.png">
             <span class="card-title">Languages</span>
-            …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <language>://<language specific expression address>. That URL and the Expression itself is the only objective part in AD4M.
+            …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <span class="code">&#60;language&#62;://&#60;language specific expression address&#62;</span>. That URL and the Expression itself is the only objective part in AD4M.
             <div class="clearfix"></div>    
         </div>
 
         <div class="card">
             <img class="card-image" src="perspective.png">
             <span class="card-title">Perspectives</span>
-            …belong to a specific agent. They represent context and association between expressions. They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links because all three items are just URLs pointing to expressions. <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span> There is no such thing as a Perspective that does not belong to an agent. It is like the canvas on which an agent perceives and onto which they create anything. To the next layer above (either the very general UI built in Perspectivism - or any other special purpose UI), they are like a database scope.
+            …belong to a specific agent. They represent context and association between expressions. 
+            They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links 
+            because all three items are just URLs pointing to expressions. 
+            <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span>
+            There is no such thing as a Perspective that does not belong to an agent. 
+            It is like the canvas on which an agent perceives and onto which they create anything. 
+            To the next layer above (either the very general UI built in <a href="https://perspect3ve.app">Perspect3ve</a> - or any other special purpose UI), they are like a database scope.
             <div class="clearfix"></div>
         </div>
 
