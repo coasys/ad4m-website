@@ -17,6 +17,10 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet"
+      href="atelier-lakeside.min.css">
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
@@ -208,6 +212,17 @@
         line-height: 60px;
     }
     
+    #core-concepts {
+        min-height: 400px;
+        padding: 140px 50px;
+        background-image: url(electrical_global_web.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     #core-concepts-nav {
         float: left;
         width: 360px;
@@ -236,9 +251,9 @@
         border-radius: 5px;
         padding: 0 40px;
         margin-left: 380px;
-        background-color:rgba(1, 1, 1, 0.5);
-        font-family: 'VT323';
-        font-size: 25px;
+        background-color:rgba(1, 1, 1, 0.8);
+        
+        font-size: 23px;
     }
 
     .card-image {
@@ -305,6 +320,48 @@
 
     .left {
         text-align: left;
+    }
+
+
+    
+    .dot {
+        height: 12px;
+        width: 12px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .container {
+        border: 3px solid #f1f1f1;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        margin-left: 380px;
+        max-width: 800px;
+        background-color: black;
+    }
+
+    .top {
+        padding: 10px;
+        background: #f1f1f1;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+
+    .content pre {
+        margin: 0;
+    }
+
+    .clearfix {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .divider {
+        text-align: center;
+        margin: 100px 0;
     }
 
     @media only screen and (max-width: 650px) {
@@ -382,6 +439,10 @@
         .card {
             margin: 220px 10px;
         }
+
+        .container {
+            margin: 350px 10px;
+        }
     }
 
 </style>
@@ -442,9 +503,179 @@
                 and many more.
             </div>        
 
-            <img src="down-arrow.png">
+            <img src="ad4m-badge.png">
         </div>
 
+        <div id="getting-started">
+            <h3>Getting started...</h3>
+
+            <ul id="core-concepts-nav">
+                <li id="nav-agents">
+                    <a href="#gs-connect">
+                        0. Connect to AD4M executor
+                    </a>
+                </li>
+                <li id="nav-agents">
+                    <a href="#gs-perspective">
+                        1. Create a Perspective
+                    </a>
+                </li>
+                <li id="nav-languages">
+                    <a href="#gs-add">
+                        2. Add semantic data
+                    </a>
+                </li>
+                <li id="nav-languages">
+                    <a href="#gs-neighbourhood">
+                        3. Share as Neighbourhood
+                    </a>
+                </li>
+                <li id="nav-languages">
+                    <a href="#gs-join">
+                        4. Join Neighbourhood
+                    </a>
+                </li>
+                <li id="nav-languages">
+                    <a href="#gs-listener">
+                        5. Add change listener
+                    </a>
+                </li>
+            </ul>
+            <div class="container" id="gs-connect">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+// Add the following to your UI markup:
+//---------
+import '@perspect3vism/ad4m-connect'
+
+&lt;ad4m-connect
+  appName="Perspect3ve"
+  appDesc=""
+  appDomain="org.perspect3vism.perspect3ve"
+  capabilities='[{"with":{"domain":"*","pointers":["*"]},"can": ["*"]}]'
+  appiconpath="./images/Perspect3ve-Logo.png"
+  &gt;&lt;/ad4m-connect&gt;
+//---------
+
+
+// Retrieve AD4M client when it's ready:
+
+import { Ad4mClient} from  '@perspect3vism/ad4m'
+
+let ad4m: Ad4mClient = await new Promise((resolve, reject) => {
+    onAuthStateChanged(async (status) => {
+        if (status === "connected_with_capabilities") {
+            alert("Connected  to Ad4m!");
+            resolve(getAd4mClient())
+        } else {
+            alert("Not connected to Ad4m!");
+        }
+    })
+})
+                    </cod></code></pre>
+                </div>
+            </div>
+            <div class="container" id="gs-perspective">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+let myPerspective = await ad4m.perspective.add("My Perspective")
+                    </cod></code></pre>
+                </div>
+            </div>
+            <div class="container" id="gs-add">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+const me = await ad4m.agent.me()
+const source = me.did
+const predicate = Literal.from("thinks").toUrl()
+const target = Literal.from("AD4M will be the last social network").toUrl()
+
+const linkExpresion = await myPerspective.add({source, predicate, target})
+                    </cod></code></pre>
+                </div>
+            </div>
+            <div class="container" id="gs-neighbourhood">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+const uniqueLinkLanguage = await ad4m.languages.applyTemplateAndPublish(
+    "QmeBD9n9Z5yZsegxArToww5zmwtPpojXN6zXJsi7WwMUa8", 
+    JSON.stringify({
+        "uuid": "84a329-77384c-1510fb", 
+        "name": "Perspective Diff Sync clone for demo Neighbourhood"
+    }));
+
+const neighbourhoodUrl = await ad4m.neighbourhood.publishFromPerspective(
+    myPerspective.uuid,
+    uniqueLinkLanguage.address,
+    new Perspective()
+)
+    
+                    </cod></code></pre>
+                </div>
+            </div>
+            <div class="container" id="gs-join">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+const joinedNeighbourhood = await ad4m.neighbourhood.joinFromUrl(neighbourhoodUrl)
+const myPerspective = await ad4m.perspective.byUUID(joinedNeighbourhood.uuid)
+                    </cod></code></pre>
+                </div>
+            </div>
+            <div class="container" id="gs-listener">
+                <div class="top">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                
+                <div class="content">
+                    <pre><code class="language-javascript">
+myPerspective.addListener('link-added', (addedLink: LinkExpression) => {
+    console.log("Got a new link:", addedLink)
+})
+
+myPerspective.addListener('link-removed', (removedLink: LinkExpression) => {
+    console.log("A link was removed:", removedLink)
+})
+                    </cod></code></pre>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+        
         <div id="core-concepts">
             <h3>Core Concepts</h3>
 
