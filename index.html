@@ -17,6 +17,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="manifest" href="site.webmanifest">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $( function() {
+      $( "#core-concepts" ).tabs();
+      $( "#getting-started" ).tabs();
+    } );
+    </script>
 <style id="applicationStylesheet" type="text/css">
     @font-face {
         font-family: 'Orbitron';
@@ -199,19 +207,42 @@
         font-size: 30px;
         line-height: 60px;
     }
+    
+    #core-concepts-nav {
+        float: left;
+        width: 360px;
+        padding: 0;
+        line-height: 50px;
+    }
+
+    #core-concepts-nav li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    #core-concepts-nav li a {
+        color: white;
+    }
+
+    .ui-tabs-active {
+        background-color: #0000ff;
+    }
 
     .card {
         border: white 1px solid;
         border-radius: 5px;
-        padding: 10px;
-        margin: 100px;
+        padding: 0 40px;
+        margin-left: 380px;
         background-color:rgba(1, 1, 1, 0.5);
         font-family: 'VT323';
         font-size: 25px;
     }
 
     .card-image {
-        width: 150px;
+        width: 90px;
         float: left;
         margin-right: 30px;
         
@@ -349,7 +380,7 @@
         }
 
         .card {
-            margin: 100px 10px;
+            margin: 220px 10px;
         }
     }
 
@@ -414,6 +445,58 @@
             <img src="down-arrow.png">
         </div>
 
+        <div id="core-concepts">
+            <h3>Core Concepts</h3>
+
+            <ul id="core-concepts-nav">
+                <li id="nav-agents">
+                    <a href="#card-agents">
+                        <img class="card-image" src="agent.png">
+                        <span class="card-title">Agents</span>
+                    </a>
+                </li>
+                <li id="nav-languages">
+                    <a href="#card-languages">
+                        <img class="card-image" src="language.png">
+                        <span class="card-title">Languages</span>
+                    </a>
+                </li id="nav-perspectives">
+                <li>
+                    <a href="#card-perspectives">
+                        <img class="card-image" src="perspective.png">
+                        <span class="card-title">Perspectives</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="card" id="card-agents">
+                <h3>Agents</h3>
+                <p>
+                    …represent humans with their devices, which is what the internet actually is. Technically represented as 
+                    <span class="emph2">Decentralized Identifier - DID</span>.
+                </p>
+            </div>
+            <div class="card" id="card-languages">
+                <h3>Languages</h3>
+                <p>
+                    …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <span class="code">&#60;language&#62;://&#60;language specific expression address&#62;</span>. That URL and the Expression itself is the only objective part in AD4M.
+                    <div class="clearfix"></div>    
+                </p>
+            </div>
+            <div class="card" id="card-perspectives">
+                <h3>Perspectives</h3>
+                <p>
+                    …belong to a specific agent. They represent context and association between expressions. 
+                    They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links 
+                    because all three items are just URLs pointing to expressions. 
+                    <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span>
+                    There is no such thing as a Perspective that does not belong to an agent. 
+                    It is like the canvas on which an agent perceives and onto which they create anything. 
+                    To the next layer above (either the very general UI built in <a href="https://perspect3ve.app">Perspect3ve</a> - or any other special purpose UI), they are like a database scope.
+                    <div class="clearfix"></div>
+                </p>
+            </div>
+        </div>
+
         
         
         <div class="filler">
@@ -427,35 +510,6 @@
 
         <div class="filler">
             It suggests 3 basic ontological entities:
-        </div>
-
-        
-        <div class="card">
-            <img class="card-image" src="agent.png">
-            <span class="card-title">Agents</span>
-            …represent humans with their devices, which is what the internet actually is. Technically represented as 
-            <span class="emph2">Decentralized Identifier - DID</span>.
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="card">
-            <img class="card-image" src="language.png">
-            <span class="card-title">Languages</span>
-            …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <span class="code">&#60;language&#62;://&#60;language specific expression address&#62;</span>. That URL and the Expression itself is the only objective part in AD4M.
-            <div class="clearfix"></div>    
-        </div>
-
-        <div class="card">
-            <img class="card-image" src="perspective.png">
-            <span class="card-title">Perspectives</span>
-            …belong to a specific agent. They represent context and association between expressions. 
-            They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links 
-            because all three items are just URLs pointing to expressions. 
-            <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span>
-            There is no such thing as a Perspective that does not belong to an agent. 
-            It is like the canvas on which an agent perceives and onto which they create anything. 
-            To the next layer above (either the very general UI built in <a href="https://perspect3ve.app">Perspect3ve</a> - or any other special purpose UI), they are like a database scope.
-            <div class="clearfix"></div>
         </div>
 
         <div class="center">
