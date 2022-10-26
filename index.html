@@ -117,10 +117,6 @@
         margin-bottom: -3px;
     }
 
-    #banner ul a: {
-        
-    }
-
     #scroll-container {
         position: absolute;
         height: 97%;
@@ -368,6 +364,55 @@
         margin: 100px 0;
     }
 
+    .footer {
+        position: relative;
+        height: 240px;
+        padding: 50px;
+        background-image: linear-gradient(180deg, rgb(0, 0, 0), rgb(51,8,31));
+    }
+
+    .footer .ad4m-logo {
+        float: left;
+        height: 250px;
+        margin-bottom: -10px;
+    }
+
+    .footer .perspect3vism-logo {
+        position: absolute;
+        top: 100px;
+        right: 50px;
+        height: 150px;
+        margin-bottom: -10px;
+    }
+
+    #link-list {
+        position: absolute;
+        list-style-type: none;
+        top: 40px;
+        left: 250px;
+    }
+
+    #link-list li {
+        margin: 20px;
+    }
+
+    #link-list #twitter-logo {
+        height: 30px;
+    }
+
+    #link-list #github-logo {
+        height: 30px;
+    }
+
+    #link-list #discord-logo {
+        height: 30px;
+    }
+
+    #link-list #youtube-logo {
+        height: auto;
+        width: 30px;
+    }
+
     @media only screen and (max-width: 650px) {
         #heading {
             padding: 20px;
@@ -454,6 +499,20 @@
 
         .container {
             margin: 350px 0px;
+        }
+
+        #link-list {
+            
+        }
+
+        .footer {
+            height: 300px
+        }
+        .footer .perspect3vism-logo-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
     }
 
@@ -740,23 +799,37 @@ myPerspective.addListener('link-removed', (removedLink: LinkExpression) => {
             </div>
         </div>
 
-        
-        
-        <div class="filler">
-            AD4M is a set of minimal assumptions to make all apps interoperate.
-        </div>
+        <div class="footer">
+            <img class="ad4m-logo" src="ad4m-squarelogo.png">
 
-        <div class="filler">
-            It is consolidating the quintessence of agent-centric software
-            architecture and as such is basically an architecture pattern.
-        </div>
+            <a href="https://perspect3vism.org" class="perspect3vism-logo-container" target="_blank">
+                <img class="perspect3vism-logo" src="perspectivism.png">
+            </a>
+            
+            <ul id="link-list">
+                <li>
+                    <a href="https://twitter.com/_a_d_4_m" target="_blank">
+                        <img id="twitter-logo" src="twitter.png" target="_blank">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/perspect3vism" target="_blank">
+                        <img id="github-logo" src="github-logo.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://discord.gg/dcX9BacsqT" target="_blank">
+                        <img id="discord-logo" src="discord-logo.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCsZ4LuI9G0vWgfQLixo_fxA" target="_blank">
+                        <img id="youtube-logo" src="youtube.png">
+                    </a>
+                </li>
+            </ul>
 
-        <div class="filler">
-            It suggests 3 basic ontological entities:
-        </div>
-
-        <div class="center">
-            <a href="https://github.com/perspect3vism/ad4m/blob/main/README.md" class="cta-button">Find out more on GitHub...</a>
+            
         </div>
         
     </div>
