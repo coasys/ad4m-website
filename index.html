@@ -773,27 +773,93 @@ myPerspective.addListener('link-removed', (removedLink: LinkExpression) => {
             <div class="card" id="card-agents">
                 <h3>Agents</h3>
                 <p>
-                    …represent humans with their devices, which is what the internet actually is. Technically represented as 
-                    <span class="emph2">Decentralized Identifier - DID</span>.
+                    …are build around <span class="emphasis">DID</span> - <a href="https://github.com/w3c/did-core" target="_blank">Decentralized Identifier</a> . Users can bring their existing identity or have AD4M create a new one.
+                    <p></p>
+                    Conceptually, AD4M agents are modelled as something that can speak and that can listen.
+                    Agents speak by creating Expressions of AD4M Languages, 
+                    whereby these Expression get signed by the agent's DID key.
+                    <p></p>
+                    AD4M agents also have a <span class="emphasis">publicly shared Perspective</span>, that other agents can see just
+                    by resolving their DID URI.
+                    This Perspective is like the agents semantic web page,
+                    consisting of statements the agent chooses to share with the world.
+                    Statements either about themselves (acting as public profile used by various apps),
+                    or about anything else.
+                    <p></p>
+                    Finally, AD4M agents declare a <span class="emphasis">direct message Language</span>,
+                    an AD4M Language they choose to be contacted with for receiving messages.
+                    <p></p>
+                    AD4M's built-in Agent-Language resolves DID URIs to AD4M Expressions that look like this:
+                    <pre><code class="language-json">
+{
+    did: "did:key:zQ3shNWd4bg67ktTVg9EMnnrsRjhkH6cRNCjRRxfTaTqBniAf",
+    perspective: {
+        links: []
+    },
+    directMessageLanguage: "lang://QmZ9Z9Z5yZsegxArToww5zmwtPpojXN6zXJsi7WwMUa8"
+}
+</code></pre>
+                    <a href="https://docs.ad4m.dev/api.html#class-ad4mclient" target="_blank"><span class="emph2">(see API docs about Agent)</span></a>
                 </p>
             </div>
             <div class="card" id="card-languages">
                 <h3>Languages</h3>
                 <p>
-                    …encapsulate the actual technology used to communicate, like <span class="emph2">Holochain or IPFS</span>, but what they provide to the high-level layers is this: Languages define Expressions, which are the atoms of what Agents communicate. Expressions are always created, and thus signed, by an agent. Expressions are referenced via a URL of the kind <span class="code">&#60;language&#62;://&#60;language specific expression address&#62;</span>. That URL and the Expression itself is the only objective part in AD4M.
+                    …encapsulate the actual technology used to communicate, like <span class="emphasis">Holochain or IPFS</span>
+                    and enable Agents to create and share Expressions.
+                    <p></p>
+                    <span class="emphasis">Expressions</span> are referenced via a URI of the kind:
+                    <div class="code">&#60;language&#62;://&#60;language specific expression address&#62;</div>
+                    (with special cases like DID URIs being parsed as such and resolved through the Agent Language).
+                    <p></p> 
+                    AD4M resolves these URIs by first looking up the Language via its hash
+                    (and potentially downloading the Language through the built-in Language of Languages)
+                    and then asking the Language about the Expression with given address.
+                    <p></p>
+                    Languages are distributed and interpreted as JavaScript modules.
+                    AD4M passes in proxy-object to the managed Holochain, IPFS, etc. instances so Language
+                    developers can use these technologies without having to set them up or manage themselves.
+                    <pre><code class="language-javascript">
+// Example of a Language that uses the Holochain proxy object                        
+export default async function create(context: LanguageContext): Promise<Language> {
+    const Holochain = context.Holochain as HolochainLanguageDelegate;
+    await Holochain.registerDNAs([{ file: DNA, nick: DNA_NICK }]);
+
+    // ...
+
+    async get(expressionAddress: Address): Promise<Expression> {
+        const expression = await this.#DNA.call(
+          DNA_NICK,
+          "zome_name",
+          "get_expression_zome_function_name",
+          expressionAddress
+        );
+    }
+}
+                    </code></pre>
+                    <a href="https://docs.ad4m.dev/language.html" target="_blank"><span class="emph2">(Read section in docs about how to write AD4M Languages)</span></a>
                     <div class="clearfix"></div>    
                 </p>
             </div>
             <div class="card" id="card-perspectives">
                 <h3>Perspectives</h3>
                 <p>
-                    …belong to a specific agent. They represent context and association between expressions. 
-                    They consist of a list of <span class="emph2">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links 
-                    because all three items are just URLs pointing to expressions. 
-                    <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric.</span>
-                    There is no such thing as a Perspective that does not belong to an agent. 
-                    It is like the canvas on which an agent perceives and onto which they create anything. 
-                    To the next layer above (either the very general UI built in <a href="https://perspect3ve.app">Perspect3ve</a> - or any other special purpose UI), they are like a database scope.
+                    …are local and private graph databases. They represent context and association between expressions. 
+                    <p></p>
+                    They consist of a list of <span class="emphasis">RDF/semantic web</span> like triplets (subject-predicate-obejct) called links 
+                    because all three items are just Expression URIs pointing to Expressions of arbitrary Languages. 
+                    <p></p>
+                    <span class="emphasis">Perspectives are like Solid’s pods, but they are agent-centric:</span>
+                    <ul>
+                        <li>Atomic Perspectives belong to and are stored with a single Agent.</li>
+                        <li>Links inside Perspectives are Link Expressions, so they include their provenance and cryptographic signature</li>
+                    </ul>
+                    
+                    While Expressions are objective (every agent resolving their URI renders the same data),
+                    <span class="emphasis">Perspectives represent subjective associations between objective Expressions.</span>
+                    <p></p>
+                    <a href="#getting-started"><span class="emph2">(See Gettint Started section above for how to deal with Perspectives)</span></a>
+                    
                     <div class="clearfix"></div>
                 </p>
             </div>
@@ -803,7 +869,7 @@ myPerspective.addListener('link-removed', (removedLink: LinkExpression) => {
             <img class="ad4m-logo" src="ad4m-squarelogo.png">
 
             <a href="https://perspect3vism.org" class="perspect3vism-logo-container" target="_blank">
-                <img class="perspect3vism-logo" src="perspectivism.png">
+                <img class="perspect3vism-logo" src="perspectivism.png">§
             </a>
             
             <ul id="link-list">
